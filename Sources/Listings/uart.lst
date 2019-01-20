@@ -1,0 +1,51 @@
+C51 COMPILER V9.54   UART                                                                  01/20/2019 21:08:38 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN .\Objects\uart.obj
+COMPILER INVOKED BY: F:\Keil_v5\C51\BIN\C51.EXE uart.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\GPS 3.0) DEBUG OBJECTEXTEND PR
+                    -INT(.\Listings\uart.lst) TABS(2) OBJECT(.\Objects\uart.obj)
+
+line level    source
+
+   1          /*
+   2          --------------------------------------------------------------------
+   3          --------------------------------------------------------------------
+   4          * uart.c
+   5          * setup serial 
+   6          * use 11.0592MHz
+   7          * Bound Rate:9600
+   8          * data format:8bit,1 stop bit,0 check bit
+   9          --------------------------------------------------------------------
+  10          --------------------------------------------------------------------
+  11          */
+  12          
+  13          #include "reg52.h"
+  14          #include "uart.h"
+  15          //initial serial
+  16          void init_uart(void)  
+  17          {
+  18   1        SCON = 0x50;      //serial mode use 1            
+  19   1        TMOD|= 0x20;      //timer work for mode 2                 
+  20   1        PCON|= 0x00;      //SMOD=0,bound rate no boubling                                                  
+  21   1        TH1  = 0xFD;        //load timer primary number 
+  22   1        TL1  = 0xFD;          
+  23   1        TR1  = 1;         //enable timer1 interrupt                                                         
+  24   1        ES   = 1;         //enable serial interrupt                
+  25   1        EA   = 1;         //enale total interrupt 
+  26   1      } 
+  27          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     19    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
